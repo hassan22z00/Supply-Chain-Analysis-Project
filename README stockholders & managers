@@ -1,0 +1,40 @@
+Executive Story — Procurement Process Intelligence
+This project is designed to explain a process problem, not just a technology stack.
+60–90 second version for a non-technical manager
+Imagine you are responsible for procurement operations across a large organization. You can see how many purchase-order items exist, but the totals do not tell you how work actually moves from purchase order to goods receipt, invoice receipt, and invoice clearing.
+
+I used a real, anonymized procurement event log to reconstruct that journey across 251,463 purchase-order-item cases and more than 1.58 million recorded events. The analysis revealed 13,810 different process sequences, so the operation is not following one single path.
+
+The clearest opportunity for investigation appeared after invoice receipt. For the 183,009 cases where invoice receipt was followed by a recorded clearing event, the median interval was 42.07 days, the 90th percentile was 97.13 days, and 62.67% took more than 30 days. Another 28,081 invoice-receipt cases had no clearing event recorded in the available log.
+
+I turned those findings into a repeatable data pipeline, a PostgreSQL analytical model, and a Power BI dashboard. The dashboard helps an operations manager move from a high-level KPI to the companies, spend areas, and activity patterns that should be investigated next.
+
+The project does not claim that every long interval is a policy breach or that every missing clearing event is an unpaid invoice. It provides evidence to prioritize investigation and shows what additional business data—such as payment terms, invoice status, and approval reasons—would be needed to determine root causes.
+
+30-second version
+I built a procurement analytics solution using a real anonymized event log with 251,463 purchase-order-item cases and 1.58 million events. It reconstructs purchasing activity, measures invoice-processing time, and highlights where further investigation may be needed. The key finding is a 42.07-day median from recorded invoice receipt to subsequent clearing, with a 97.13-day P90. I implemented the data preparation in Python, the analytical model in PostgreSQL, and the management dashboard in Power BI.
+
+One-sentence value proposition
+I turn procurement event data into a clear view of process execution and invoice-processing performance, helping managers decide where to investigate first.
+Business story structure
+1. Situation: Procurement leaders see document totals, but not the end-to-end process path or where time accumulates.
+2. Evidence: 251,463 cases, 1,587,802 events, 13,810 variants; invoice receipt to subsequent clearing has a 42.07-day median and 97.13-day P90.
+3. Action: Create a validated Python ETL, PostgreSQL model and SQL views, then surface the KPIs and segmentation in Power BI. Bash orchestration is provided to standardize repeat runs and capture logs.
+4. Decision enabled: Prioritize drill-down by company, document type and spend area, then validate long cases against payment terms, approval records and accounting status.
+5. Boundary: This is an independent analysis of the BPI Challenge 2019 dataset, not Hager Group data. The analysis identifies signals for investigation; it does not prove causes, SLA breaches, or unpaid invoices.
+Questions a manager may ask
+Does 42.07 days mean the company paid late?
+
+No. It is the median elapsed time between the first recorded invoice-receipt event and the first subsequent recorded clearing event for the valid ordered cases. The dataset does not provide the contract-specific payment terms needed to label this late.
+
+Are the 28,081 invoices unpaid?
+
+The event log contains no Clear Invoice event for those cases. That is not proof they remained unpaid; payment may be outside the observed log or event capture may be incomplete.
+
+What should the business do next?
+
+Prioritize a sample review of long-cycle cases, segment by document type and spend area, then reconcile with payment terms, invoice blocks, approvals, and accounting records.
+
+Did this project achieve a cost saving?
+
+No savings have been measured. The project identifies where to investigate; financial impact would require a validated root cause, an agreed intervention, and before/after measurement.
