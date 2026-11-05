@@ -5,9 +5,6 @@
 
 This independent project examines purchase-order-item processing, invoice receipt and clearing, process variants, and procurement event patterns. It combines Python-based data preparation, PostgreSQL analytics, and a Power BI reporting layer to turn a large event log into operationally interpretable measures.
 
-**Project status:** Python analysis, PostgreSQL data model and SQL analytics, and Power BI dashboard are implemented by the author. The repository contains the documented analytical results from the completed work. SAP S/4HANA / ABAP and Celonis are not presented as completed integrations or implemented components.
-
-
 ## Executive summary
 
 The analysis uses a case-level time-window scope from the BPI Challenge 2019 event log. A case represents a **purchase-order item**, not a purchase-order header.
