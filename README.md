@@ -111,8 +111,8 @@ There are 13,810 distinct variants. The most common variant accounts for 20.00% 
 
 ## Architecture
 
-flowchart TD
-    A[Official BPI Challenge 2019 CSV] --> B[Python / pandas chunked extraction]
+flowchart
+    A [Official BPI Challenge 2019 CSV] --> B[Python / pandas chunked extraction]
     B --> C[Timestamp parsing and case-level scope]
     C --> D[Parquet data products]
     D --> E[PostgreSQL]
